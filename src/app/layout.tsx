@@ -53,6 +53,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfilePage",
+              "dateCreated": "2026-03-23T00:00:00-07:00",
+              "mainEntity": {
+                "@type": "Person",
+                "name": "Shreyansh Kumar",
+                "alternateName": "Shrey",
+                "jobTitle": "Senior Software Engineer & Tech Lead",
+                "url": "https://shreykumar.me",
+                "image": "https://shreykumar.me/professional.jpg",
+                "sameAs": [
+                  "https://linkedin.com/in/shreykumar",
+                  "https://github.com/ShreyKumar"
+                ],
+                "description": "Senior Software Engineer & Technical Lead specializing in architecting high-performance enterprise platforms and integrating advanced AI solutions.",
+                "knowsAbout": [
+                  "Software Engineering",
+                  "Web Development",
+                  "Artificial Intelligence",
+                  "Next.js",
+                  "React",
+                  "E-commerce platforms",
+                  "Technical Leadership"
+                ]
+              }
+            })
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />

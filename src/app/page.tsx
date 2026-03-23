@@ -7,9 +7,9 @@ import { ArrowRight, Download, Github, Linkedin, Mail, Trophy } from "lucide-rea
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-24 pb-12 w-full">
-      <div className="flex flex-col items-center justify-center min-h-[80vh]">
-        <motion.div
+    <article className="flex flex-col gap-24 pb-12 w-full" itemScope itemType="https://schema.org/Person">
+      <section className="flex flex-col items-center justify-center min-h-[80vh]">
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -42,7 +42,7 @@ export default function Home() {
             Available for new opportunities
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight text-balance">
+          <h1 itemProp="name" className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight text-balance">
             Building <span className="text-primary">Intelligent</span> Systems.
           </h1>
 
@@ -96,10 +96,8 @@ export default function Home() {
               <Mail size={24} />
             </Link>
           </motion.div>
-        </motion.div>
-      </div>
-
-
-    </div>
+        </motion.header>
+      </section>
+    </article>
   );
 }
