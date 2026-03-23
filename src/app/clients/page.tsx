@@ -1,14 +1,64 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBag, Globe, Building2, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { ReactNode, useState } from "react";
+
+interface ClientProject {
+  name: string;
+  url: string;
+  icon: ReactNode;
+  description: string;
+  features?: string[];
+  tech: string[];
+}
 
 export default function Clients() {
-  const clients = [
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const clients: ClientProject[] = [
+    {
+      name: "General Electric",
+      url: "https://www.ge.com",
+      icon: <img src="https://www.google.com/s2/favicons?domain=ge.com&sz=128" alt="GE Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
+      description: "Led the discovery phase for a strategic platform replatforming initiative, conducting a comprehensive evaluation of the existing architecture and delivering data-driven recommendations for a next-generation ecommerce solution.",
+      features: [
+        "Developed a weighted scoring framework to benchmark leading ecommerce platforms against core business and technical requirements.",
+        "Synthesized findings into an executive presentation, delivering actionable recommendations to senior stakeholders that informed the final platform selection."
+      ],
+      tech: ["commercetools", "SAP Commerce Cloud", "Adobe Commerce"]
+    },
+    {
+      name: "ecobee",
+      url: "https://www.ecobee.com",
+      icon: <img src="https://www.google.com/s2/favicons?domain=ecobee.com&sz=128" alt="ecobee Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
+      description: "Architected scalable vendor integration frameworks and platforms driving revenue growth and operational efficiency for a leading smart home technology company.",
+      features: [
+        "Spearheaded the design and implementation of an external vendor federation layer underpinning a new Referral Marketing platform, driving a 63% month-over-month increase in purchase revenue.",
+        "Directed and unblocked a BNPL (Buy Now, Pay Later) integration, aligning Engineering, Product, and external partners.",
+        "Performed a rigorous weighted scoring analysis evaluating GraphQL and REST within a modernized Next.js ecosystem, directly informing long-term API strategy.",
+        "Drove the site\u2019s migration from Gatsby to a self-hosted Next.js platform on GCP to improve performance, developer experience, and deployment flexibility."
+      ],
+      tech: ["Next.js", "Gatsby", "GCP", "GraphQL", "TypeScript"]
+    },
+    {
+      name: "Do It Center Panama",
+      url: "https://www.doitcenter.com.pa",
+      icon: <img src="https://www.google.com/s2/favicons?domain=doitcenter.com.pa&sz=128" alt="Do It Center Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
+      description: "Made optimizations to improve the delivery of the project and alleviated project risk level",
+      tech: ["Adobe Commerce Cloud", "Node.js", "Next.js", "Tailwind CSS", "Headless Commerce"]
+    },
+    {
+      name: "Movado Group",
+      url: "https://www.movadogroup.com",
+      icon: <img src="https://www.google.com/s2/favicons?domain=movadogroup.com&sz=128" alt="Movado Group Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
+      description: "Migration discovery project onto Builder.io CMS and Salesforce Commerce Cloud on Headless architecture",
+      tech: ["Builder.io CMS", "Salesforce Commerce Cloud", "Next.js", "Tailwind CSS"]
+    },
     {
       name: "Harry Rosen",
       url: "https://www.harryrosen.com",
-      icon: <img src="https://www.google.com/s2/favicons?domain=harryrosen.com&sz=128" alt="Harry Rosen Logo" className="w-12 h-12 object-contain mb-4 rounded-xl bg-white p-1.5 shadow-sm" />,
+      icon: <img src="https://www.google.com/s2/favicons?domain=harryrosen.com&sz=128" alt="Harry Rosen Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
       description: "Delivered headless commerce solutions serving millions of customers across Canada.",
       features: [
         "Architected scalable features including Wishlist, Cart, Shop By Store, and Gift Message.",
@@ -20,10 +70,10 @@ export default function Clients() {
     {
       name: "Princess Auto",
       url: "https://www.princessauto.com",
-      icon: <img src="https://www.google.com/s2/favicons?domain=princessauto.com&sz=128" alt="Princess Auto Logo" className="w-12 h-12 object-contain mb-4 rounded-xl bg-white p-1.5 shadow-sm" />,
+      icon: <img src="https://www.google.com/s2/favicons?domain=princessauto.com&sz=128" alt="Princess Auto Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
       description: "Engineered robust checkout and compliance features for the major Canadian retail chain.",
       features: [
-        "Delivered a comprehensive Checkout feature employing Bold Commerce’s Checkout APIs.",
+        "Delivered a comprehensive Checkout feature employing Bold Commerce\u2019s Checkout APIs.",
         "Engineered a tax integration feature integrating Oracle Commerce Cloud, Bold Commerce, and a custom Tax Service outperforming compliance standards."
       ],
       tech: ["Next.js", "Chakra UI", "Vercel", "Oracle Commerce Cloud", "Bold Commerce"]
@@ -31,7 +81,7 @@ export default function Clients() {
     {
       name: "Spirent Communications",
       url: "https://www.spirent.com",
-      icon: <img src="https://www.google.com/s2/favicons?domain=spirent.com&sz=128" alt="Spirent Communications Logo" className="w-12 h-12 object-contain mb-4 rounded-xl bg-white p-1.5 shadow-sm" />,
+      icon: <img src="https://www.google.com/s2/favicons?domain=spirent.com&sz=128" alt="Spirent Communications Logo" className="w-16 h-16 object-contain rounded-xl bg-white p-2 shadow-sm" />,
       description: "Developed a global CMS website for a leading telecommunications company.",
       features: [
         "Designed and developed the frontend utilizing Contentful CMS and Next.js.",
@@ -40,6 +90,8 @@ export default function Clients() {
       tech: ["Contentful", "Netlify", "React", "Next.js", "Tailwind CSS"]
     }
   ];
+
+  const hovered = hoveredIndex !== null ? clients[hoveredIndex] : null;
 
   return (
     <div className="max-w-5xl mx-auto py-8">
@@ -56,47 +108,94 @@ export default function Clients() {
         </p>
       </motion.div>
 
-      <div className="space-y-12">
+      {/* Hover container — keeps detail panel alive while mousing between logos and details */}
+      <div onMouseLeave={() => setHoveredIndex(null)}>
+
+      {/* Logo Grid */}
+      <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
         {clients.map((client, index) => (
           <motion.div
             key={client.name}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-            className="glass p-8 md:p-10 rounded-3xl flex flex-col md:flex-row gap-8 items-start border border-border shadow-sm hover:shadow-lg transition-all"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.06 * index, duration: 0.4 }}
+            onHoverStart={() => setHoveredIndex(index)}
+            onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
+            className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 ${hoveredIndex !== null && hoveredIndex !== index
+                ? "opacity-30"
+                : "opacity-100"
+              }`}
           >
-            <div className="md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left">
-              {client.icon}
-              <h2 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-                {client.name}
-              </h2>
-              {client.url && (
-                <a href={client.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-primary flex items-center gap-1 hover:underline mb-4">
-                  Visit Site <ExternalLink size={14} />
-                </a>
-              )}
-              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                {client.description}
-              </p>
-              <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                {client.tech.map(t => (
-                  <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div className="md:w-2/3 md:pl-8 md:border-l border-border mt-6 md:mt-0 w-full">
-              <h3 className="text-xl font-bold mb-4">What I Built</h3>
-              <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-4 marker:text-primary/50 text-lg">
-                {client.features.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
-            </div>
+            {client.icon}
+            <span className="text-sm font-semibold text-foreground text-center max-w-[100px] leading-tight">
+              {client.name}
+            </span>
           </motion.div>
         ))}
+      </div>
+
+      {/* Detail Panel — appears below logos on hover */}
+      <div className="min-h-[280px]">
+        {hovered ? (
+          <motion.div
+            key={hoveredIndex}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="border-t border-border pt-10"
+          >
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* Left */}
+              <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
+                <div className="flex items-center gap-3 mb-4">
+                  <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
+                  {hovered.url && (
+                    <a
+                      href={hovered.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
+                    >
+                      Visit <ExternalLink size={14} />
+                    </a>
+                  )}
+                </div>
+                <p className="text-muted-foreground text-base leading-relaxed mb-5">
+                  {hovered.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {hovered.tech.map(t => (
+                    <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: features */}
+              {hovered.features && hovered.features.length > 0 && (
+                <div className="md:w-3/5 md:pl-8 md:border-l border-border">
+                  <h3 className="text-lg font-bold mb-4 text-foreground">What I Built</h3>
+                  <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/40 text-base">
+                    {hovered.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center justify-center h-full text-muted-foreground/40 pt-16"
+          >
+            <p className="text-lg">Hover over a client to see details</p>
+          </motion.div>
+        )}
+      </div>
       </div>
     </div>
   );
