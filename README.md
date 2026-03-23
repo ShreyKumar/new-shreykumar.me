@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>Shreyansh Kumar – Portfolio</h1>
+  <p>A modern, high-performance personal portfolio website built to showcase my experience as a Senior Software Engineer, Technical Lead, and Career Mentor.</p>
+</div>
 
-## Getting Started
+---
 
-First, run the development server:
+## 🤖 AI-Engineered Project
+This entire website was autonomously generated, designed, and iteratively refined using **Agentic AI**. Operating as an advanced AI pair-programmer, the **Antigravity AI agent** (by Google DeepMind) collaborated to structure the application architecture, write the React components, design the SVGs, and construct the overarching monochrome UI.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Everything was orchestrated from the ground up utilizing bleeding-edge **AI-native IDEs** and agentic workflows, showcasing how rapidly and precisely enterprise-grade, intelligent user interfaces can be constructed today.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project is built using a heavily optimized modern web development stack:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Core
+- **Framework**: [Next.js 16.2](https://nextjs.org/) (App Router)
+- **Library**: [React 19](https://react.dev/)
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
 
-## Learn More
+### Styling & UI
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Theming**: [next-themes](https://github.com/pacocoursey/next-themes) (Flawless Dark/Light mode integration)
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Sleek Monochrome Design**: Minimalist, high-contrast, professional interface prioritizing readability.
+- **Custom Animated Logo**: Interactive SVG-based logo representing technical architecture and leadership.
+- **Responsive Animations**: Beautiful layout transitions and staggered micro-animations powered by Framer Motion.
+- **Dark Mode Support**: Context-aware theming with CSS variables seamlessly handling system preferences.
+- **App Router Architecture**: State-of-the-art Next.js routing, layouts, and rendering optimizations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Getting Started
 
-## Deploy on Vercel
+To run this project locally:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repository and install the dependencies:
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the site.
+
+## 📄 Site Structure
+
+- `/` - **Home**: Hero section, value proposition, and quick links.
+- `/about` - **About**: Professional background and personal journey.
+- `/projects` - **Projects**: Showcase of technical engineering and open-source work.
+- `/clients` - **Clients**: Highlights B2B, enterprise, and consulting work.
+- `/mentorship` - **Mentorship**: Details about engineering career mentoring.
+- `/achievements` - **Achievements**: Awards, industry recognitions, and formal education.
+- `/contact` - **Contact**: Connect capabilities and professional social links.
+
+## 📝 License
+
+Designed and engineered by Shreyansh Kumar. All rights reserved.
