@@ -1,0 +1,38 @@
+import Link from "next/link";
+import { Linkedin, Mail, FileText, Github } from "lucide-react";
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <footer className="w-full border-t glass mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="md:flex md:items-center md:justify-between">
+          <div className="flex justify-center space-x-6 md:order-2">
+            <a href="https://linkedin.com/in/shreykumar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <span className="sr-only">LinkedIn</span>
+              <Linkedin size={20} />
+            </a>
+            <a href="https://github.com/ShreyKumar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <span className="sr-only">GitHub</span>
+              <Github size={20} />
+            </a>
+            <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+              <span className="sr-only">Contact</span>
+              <Mail size={20} />
+            </Link>
+            <Link href="/Resume March 2026.pdf" target="_blank" className="text-muted-foreground hover:text-primary transition-colors">
+              <span className="sr-only">Resume</span>
+              <FileText size={20} />
+            </Link>
+          </div>
+          <div className="mt-8 md:mt-0 md:order-1">
+            <p className="text-center text-sm text-muted-foreground">
+              &copy; {currentYear} Shreyansh Kumar. Built with Next.js App Router.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
