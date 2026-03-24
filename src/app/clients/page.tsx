@@ -114,23 +114,26 @@ export default function Clients() {
         {/* Logo Grid */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
           {clients.map((client, index) => (
-            <motion.div
+            <motion.button
               key={client.name}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.06 * index, duration: 0.4 }}
               onHoverStart={() => setHoveredIndex(index)}
+              onFocus={() => setHoveredIndex(index)}
               onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
-              className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 ${hoveredIndex !== null && hoveredIndex !== index
+              aria-label={`Show details for ${client.name}`}
+              aria-expanded={hoveredIndex === index}
+              className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${hoveredIndex !== null && hoveredIndex !== index
                 ? "opacity-30"
                 : "opacity-100"
                 }`}
             >
               {client.icon}
-              <span className="text-sm font-semibold text-foreground text-center max-w-[100px] leading-tight">
+              <span className="text-sm font-semibold text-foreground text-center max-w-[120px] leading-tight break-words w-full">
                 {client.name}
               </span>
-            </motion.div>
+            </motion.button>
           ))}
         </div>
 
@@ -190,7 +193,7 @@ export default function Clients() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex items-center justify-center h-full text-muted-foreground/40 pt-16"
+              className="flex items-center justify-center h-full text-foreground/60 pt-16"
             >
               <p className="text-lg">Hover over a client to see details</p>
             </motion.div>
