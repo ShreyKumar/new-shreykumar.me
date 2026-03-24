@@ -21,8 +21,8 @@ export default function Footer() {
               <span className="sr-only">Contact</span>
               <Mail size={20} />
             </Link>
-            <Link href="/Resume March 2026.pdf" target="_blank" className="text-muted-foreground hover:text-primary transition-colors">
-              <span className="sr-only">Resume</span>
+            <Link href="mailto:shreykumar961@gmail.com?subject=Resume Request" className="text-muted-foreground hover:text-primary transition-colors">
+              <span className="sr-only">Request Resume</span>
               <FileText size={20} />
             </Link>
           </div>

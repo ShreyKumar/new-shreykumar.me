@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Download, Github, Linkedin, Mail, Trophy } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Trophy } from "lucide-react";
 
 export default function Home() {
   return (
@@ -69,11 +69,10 @@ export default function Home() {
               My Achievements <Trophy size={20} />
             </Link>
             <Link
-              href="/Resume March 2026.pdf"
-              target="_blank"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-xl glass font-semibold hover:bg-card hover:text-foreground transition-all shadow-sm hover:shadow-md hover:-translate-y-1"
+              href="mailto:shreykumar961@gmail.com?subject=Resume Request"
+              className="px-8 py-4 rounded-2xl bg-secondary text-secondary-foreground font-semibold flex items-center justify-center gap-2 hover:bg-secondary/80 transition-all border border-border shadow-sm"
             >
-              Download Resume <Download size={20} />
+              Request Resume <Mail size={20} />
             </Link>
           </motion.div>
 

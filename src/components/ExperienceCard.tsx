@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Heading } from "./ui/Primitives";
 
 interface ExperienceCardProps {
   role: string;
@@ -19,16 +20,24 @@ export default function ExperienceCard({
   bullets,
   children,
 }: ExperienceCardProps) {
+  const cardId = `exp-${company.replace(/\s+/g, '-').toLowerCase()}`;
+
   return (
-    <div className="mb-12 relative">
+    <article 
+      className="mb-12 relative" 
+      aria-labelledby={`${cardId}-title`}
+    >
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
         <div>
-          <h3 className="text-2xl font-bold text-foreground">{role}</h3>
-          <p className="text-lg text-primary font-medium mt-1">
-            {company} <span className="text-muted-foreground font-normal">• {location}</span>
+          <Heading level={3} id={`${cardId}-title`} className="mb-1">{role}</Heading>
+          <p className="text-lg text-primary font-medium">
+            {company} <span className="text-muted-foreground font-normal whitespace-nowrap">• {location}</span>
           </p>
         </div>
-        <p className="text-muted-foreground mt-2 md:mt-0 font-medium bg-secondary/50 px-3 py-1 rounded-full text-sm w-fit border border-border">
+        <p 
+          className="text-muted-foreground mt-2 md:mt-0 font-medium bg-secondary/50 px-3 py-1 rounded-full text-sm w-fit border border-border"
+          aria-label={`Duration: ${duration}`}
+        >
           {duration}
         </p>
       </div>
@@ -44,6 +53,6 @@ export default function ExperienceCard({
       )}
 
       {children && <div className="mt-8">{children}</div>}
-    </div>
+    </article>
   );
 }

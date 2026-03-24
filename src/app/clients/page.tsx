@@ -111,91 +111,91 @@ export default function Clients() {
       {/* Hover container — keeps detail panel alive while mousing between logos and details */}
       <div onMouseLeave={() => setHoveredIndex(null)}>
 
-      {/* Logo Grid */}
-      <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
-        {clients.map((client, index) => (
-          <motion.div
-            key={client.name}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.06 * index, duration: 0.4 }}
-            onHoverStart={() => setHoveredIndex(index)}
-            onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
-            className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 ${hoveredIndex !== null && hoveredIndex !== index
+        {/* Logo Grid */}
+        <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
+          {clients.map((client, index) => (
+            <motion.div
+              key={client.name}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.06 * index, duration: 0.4 }}
+              onHoverStart={() => setHoveredIndex(index)}
+              onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
+              className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 ${hoveredIndex !== null && hoveredIndex !== index
                 ? "opacity-30"
                 : "opacity-100"
-              }`}
-          >
-            {client.icon}
-            <span className="text-sm font-semibold text-foreground text-center max-w-[100px] leading-tight">
-              {client.name}
-            </span>
-          </motion.div>
-        ))}
-      </div>
+                }`}
+            >
+              {client.icon}
+              <span className="text-sm font-semibold text-foreground text-center max-w-[100px] leading-tight">
+                {client.name}
+              </span>
+            </motion.div>
+          ))}
+        </div>
 
-      {/* Detail Panel — appears below logos on hover */}
-      <div className="min-h-[280px]">
-        {hovered ? (
-          <motion.div
-            key={hoveredIndex}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="border-t border-border pt-10"
-          >
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Left */}
-              <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
-                <div className="flex items-center gap-3 mb-4">
-                  <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
-                  {hovered.url && (
-                    <a
-                      href={hovered.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
-                    >
-                      Visit <ExternalLink size={14} />
-                    </a>
-                  )}
-                </div>
-                <p className="text-muted-foreground text-base leading-relaxed mb-5">
-                  {hovered.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {hovered.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right: features */}
-              {hovered.features && hovered.features.length > 0 && (
-                <div className="md:w-3/5 md:pl-8 md:border-l border-border">
-                  <h3 className="text-lg font-bold mb-4 text-foreground">What I Built</h3>
-                  <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/40 text-base">
-                    {hovered.features.map((feature, i) => (
-                      <li key={i}>{feature}</li>
+        {/* Detail Panel — appears below logos on hover */}
+        <div className="min-h-[280px]">
+          {hovered ? (
+            <motion.div
+              key={hoveredIndex}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="border-t border-border pt-10"
+            >
+              <div className="flex flex-col md:flex-row gap-8">
+                {/* Left */}
+                <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
+                    {hovered.url && (
+                      <a
+                        href={hovered.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
+                      >
+                        Visit <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+                  <p className="text-muted-foreground text-base leading-relaxed mb-5">
+                    {hovered.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {hovered.tech.map(t => (
+                      <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
+                        {t}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-              )}
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="flex items-center justify-center h-full text-muted-foreground/40 pt-16"
-          >
-            <p className="text-lg">Hover over a client to see details</p>
-          </motion.div>
-        )}
-      </div>
+
+                {/* Right: features */}
+                {hovered.features && hovered.features.length > 0 && (
+                  <div className="md:w-3/5 md:pl-8 md:border-l border-border">
+                    <h3 className="text-lg font-bold mb-4 text-foreground">What I Built</h3>
+                    <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/40 text-base">
+                      {hovered.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="flex items-center justify-center h-full text-muted-foreground/40 pt-16"
+            >
+              <p className="text-lg">Hover over a client to see details</p>
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );

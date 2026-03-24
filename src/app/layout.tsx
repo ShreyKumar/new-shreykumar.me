@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DigitalTwinChat from "@/components/DigitalTwinChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,6 +95,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <DigitalTwinChat />
         </ThemeProvider>
       </body>
     </html>
