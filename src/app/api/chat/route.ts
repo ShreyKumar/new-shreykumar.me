@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
         "HTTP-Referer": "https://shreykumar.me",
-        "X-Title": "Shrey Kumar Digital Twin",
+        "X-Title": "Portfolio Chat API",
       },
       body: JSON.stringify({
         model: "gpt-oss-120b",
