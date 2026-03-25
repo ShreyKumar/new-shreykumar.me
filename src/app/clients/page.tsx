@@ -99,34 +99,36 @@ export default function Clients() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="md:border-t md:border-border pt-6 md:pt-10"
+      className="md:border-t md:border-border pt-5 md:pt-10"
     >
       <div className="flex flex-col md:flex-row gap-8 relative">
-        {/* Mobile Close Button */}
-        <button
-          className="md:hidden absolute top-0 right-0 p-2 text-muted-foreground hover:text-foreground bg-secondary/80 rounded-full shadow-sm z-30 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-          onClick={(e) => {
-            e.stopPropagation();
-            setHoveredIndex(null);
-          }}
-          aria-label="Close details"
-        >
-          <X size={18} />
-        </button>
         {/* Left */}
         <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
-          <div className="flex items-center gap-3 mb-4 pr-12">
-            <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
-            {hovered.url && (
-              <a
-                href={hovered.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
-              >
-                Visit <ExternalLink size={14} />
-              </a>
-            )}
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex items-center flex-wrap gap-3">
+              <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
+              {hovered.url && (
+                <a
+                  href={hovered.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
+                >
+                  Visit <ExternalLink size={14} />
+                </a>
+              )}
+            </div>
+            {/* Mobile Close Button */}
+            <button
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground bg-secondary/80 rounded-full shadow-sm flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setHoveredIndex(null);
+              }}
+              aria-label="Close details"
+            >
+              <X size={18} />
+            </button>
           </div>
           <p className="text-muted-foreground text-base leading-relaxed mb-5">
             {hovered.description}
@@ -196,13 +198,13 @@ export default function Clients() {
                   {client.name}
                 </span>
               </motion.button>
-              
+
               {/* Mobile Absolute Detail Panel */}
               {hoveredIndex === index && (
-                <div 
-                  className="absolute top-[calc(100%+12px)] z-50 md:hidden bg-background/95 backdrop-blur-xl rounded-3xl p-6 border border-border shadow-2xl overflow-y-auto max-h-[65vh]"
+                <div
+                  className="absolute top-[calc(100%+12px)] z-50 md:hidden bg-background/95 backdrop-blur-xl rounded-2xl p-5 border border-border shadow-2xl overflow-y-auto max-h-[65vh]"
                   style={{
-                    width: 'calc(100vw - 48px)',
+                    width: 'calc(100vw - 32px)',
                     left: '50%',
                   }}
                   ref={(el) => {
