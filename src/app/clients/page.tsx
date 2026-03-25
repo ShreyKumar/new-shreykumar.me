@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, X } from "lucide-react";
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 
 interface ClientProject {
   name: string;
@@ -93,6 +93,68 @@ export default function Clients() {
 
   const hovered = hoveredIndex !== null ? clients[hoveredIndex] : null;
 
+  const detailContent = hovered ? (
+    <motion.div
+      key={hoveredIndex}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="md:border-t md:border-border pt-6 md:pt-10"
+    >
+      <div className="flex flex-col md:flex-row gap-8 relative">
+        {/* Mobile Close Button */}
+        <button
+          className="md:hidden absolute top-0 right-0 p-2 text-muted-foreground hover:text-foreground bg-secondary/80 rounded-full shadow-sm z-30 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            setHoveredIndex(null);
+          }}
+          aria-label="Close details"
+        >
+          <X size={18} />
+        </button>
+        {/* Left */}
+        <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
+          <div className="flex items-center gap-3 mb-4 pr-12">
+            <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
+            {hovered.url && (
+              <a
+                href={hovered.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
+              >
+                Visit <ExternalLink size={14} />
+              </a>
+            )}
+          </div>
+          <p className="text-muted-foreground text-base leading-relaxed mb-5">
+            {hovered.description}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {hovered.tech.map(t => (
+              <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: features */}
+        {hovered.features && hovered.features.length > 0 && (
+          <div className="md:w-3/5 md:pl-8 md:border-l border-border">
+            <h3 className="text-lg font-bold mb-4 text-foreground">What I Built</h3>
+            <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/40 text-base">
+              {hovered.features.map((feature, i) => (
+                <li key={i}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  ) : null;
+
   return (
     <div className="max-w-5xl mx-auto py-8">
       <motion.div
@@ -114,96 +176,57 @@ export default function Clients() {
         {/* Logo Grid */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
           {clients.map((client, index) => (
-            <motion.button
-              key={client.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.06 * index, duration: 0.4 }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onFocus={() => setHoveredIndex(index)}
-              onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
-              aria-label={`Show details for ${client.name}`}
-              aria-expanded={hoveredIndex === index}
-              className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${hoveredIndex !== null && hoveredIndex !== index
-                ? "opacity-30"
-                : "opacity-100"
-                }`}
-            >
-              {client.icon}
-              <span className="text-sm font-semibold text-foreground text-center max-w-[120px] leading-tight break-words w-full">
-                {client.name}
-              </span>
-            </motion.button>
+            <div key={client.name} className="relative flex flex-col items-center">
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06 * index, duration: 0.4 }}
+                onHoverStart={() => setHoveredIndex(index)}
+                onFocus={() => setHoveredIndex(index)}
+                onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
+                aria-label={`Show details for ${client.name}`}
+                aria-expanded={hoveredIndex === index}
+                className={`flex flex-col items-center gap-3 cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${hoveredIndex !== null && hoveredIndex !== index
+                  ? "opacity-30"
+                  : "opacity-100"
+                  }`}
+              >
+                {client.icon}
+                <span className="text-sm font-semibold text-foreground text-center max-w-[120px] leading-tight break-words w-full">
+                  {client.name}
+                </span>
+              </motion.button>
+              
+              {/* Mobile Absolute Detail Panel */}
+              {hoveredIndex === index && (
+                <div 
+                  className="absolute top-[calc(100%+12px)] z-50 md:hidden bg-background/95 backdrop-blur-xl rounded-3xl p-6 border border-border shadow-2xl overflow-y-auto max-h-[65vh]"
+                  style={{
+                    width: 'calc(100vw - 48px)',
+                    left: '50%',
+                  }}
+                  ref={(el) => {
+                    if (el && typeof window !== 'undefined') {
+                      const parent = el.parentElement;
+                      if (!parent) return;
+                      const parentRect = parent.getBoundingClientRect();
+                      const viewportCenter = window.innerWidth / 2;
+                      const parentCenter = parentRect.left + parentRect.width / 2;
+                      const offset = viewportCenter - parentCenter;
+                      el.style.transform = `translateX(calc(-50% + ${offset}px))`;
+                    }
+                  }}
+                >
+                  {detailContent}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
-        {/* Detail Panel — appears below logos on hover (desktop), overlay on top of logos (mobile) */}
-        <div className={`transition-all duration-300 ${
-          hovered 
-            ? "absolute top-0 left-4 right-4 z-20 bg-background/95 backdrop-blur-xl p-6 md:p-0 rounded-3xl md:rounded-none border border-border/50 md:border-none shadow-2xl md:shadow-none md:min-h-[300px] max-h-[70vh] md:max-h-none overflow-y-auto md:overflow-visible md:static" 
-            : "hidden md:block min-h-[280px]"
-        }`}>
-          {hovered ? (
-            <motion.div
-              key={hoveredIndex}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="md:border-t md:border-border pt-6 md:pt-10"
-            >
-              <div className="flex flex-col md:flex-row gap-8 relative">
-                {/* Mobile Close Button */}
-                <button
-                  className="md:hidden absolute top-0 right-0 p-2 text-muted-foreground hover:text-foreground bg-secondary/80 rounded-full shadow-sm z-30"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setHoveredIndex(null);
-                  }}
-                  aria-label="Close details"
-                >
-                  <X size={18} />
-                </button>
-                {/* Left */}
-                <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
-                  <div className="flex items-center gap-3 mb-4 pr-12">
-                    <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
-                    {hovered.url && (
-                      <a
-                        href={hovered.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-primary flex items-center gap-1 hover:underline"
-                      >
-                        Visit <ExternalLink size={14} />
-                      </a>
-                    )}
-                  </div>
-                  <p className="text-muted-foreground text-base leading-relaxed mb-5">
-                    {hovered.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {hovered.tech.map(t => (
-                      <span key={t} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right: features */}
-                {hovered.features && hovered.features.length > 0 && (
-                  <div className="md:w-3/5 md:pl-8 md:border-l border-border">
-                    <h3 className="text-lg font-bold mb-4 text-foreground">What I Built</h3>
-                    <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/40 text-base">
-                      {hovered.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ) : (
+        {/* Desktop Detail Panel — appears below logos on hover */}
+        <div className="hidden md:block min-h-[280px]">
+          {hovered ? detailContent : (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
