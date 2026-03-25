@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 interface ClientProject {
@@ -109,7 +109,7 @@ export default function Clients() {
       </motion.div>
 
       {/* Hover container — keeps detail panel alive while mousing between logos and details */}
-      <div onMouseLeave={() => setHoveredIndex(null)}>
+      <div className="relative" onMouseLeave={() => setHoveredIndex(null)}>
 
         {/* Logo Grid */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
@@ -137,20 +137,35 @@ export default function Clients() {
           ))}
         </div>
 
-        {/* Detail Panel — appears below logos on hover */}
-        <div className="min-h-[280px]">
+        {/* Detail Panel — appears below logos on hover (desktop), overlay on top of logos (mobile) */}
+        <div className={`transition-all duration-300 ${
+          hovered 
+            ? "absolute top-0 left-4 right-4 z-20 bg-background/95 backdrop-blur-xl p-6 md:p-0 rounded-3xl md:rounded-none border border-border/50 md:border-none shadow-2xl md:shadow-none md:min-h-[300px] max-h-[70vh] md:max-h-none overflow-y-auto md:overflow-visible md:static" 
+            : "hidden md:block min-h-[280px]"
+        }`}>
           {hovered ? (
             <motion.div
               key={hoveredIndex}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="border-t border-border pt-10"
+              className="md:border-t md:border-border pt-6 md:pt-10"
             >
-              <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex flex-col md:flex-row gap-8 relative">
+                {/* Mobile Close Button */}
+                <button
+                  className="md:hidden absolute top-0 right-0 p-2 text-muted-foreground hover:text-foreground bg-secondary/80 rounded-full shadow-sm z-30"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setHoveredIndex(null);
+                  }}
+                  aria-label="Close details"
+                >
+                  <X size={18} />
+                </button>
                 {/* Left */}
                 <div className={hovered.features?.length ? "md:w-2/5" : "w-full"}>
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-4 pr-12">
                     <h2 className="text-2xl font-bold text-foreground">{hovered.name}</h2>
                     {hovered.url && (
                       <a
