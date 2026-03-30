@@ -116,15 +116,91 @@ export const PORTFOLIO_DATA = {
         "Built fully responsive company website using ReactJS, SCSS, Contentful and NextJS.",
         "Architected UI functionality of the core product, successfully securing Series B funding.",
         "Achieved perfect 100 SEO audit scores through WAI-ARIA and SEO best practices.",
-        "Developed REST API endpoints using MVC software design patterns."
+        "Developed REST API endpoints using MVC software design patterns.",
+        "Collaborated with the CTO and DevOps Engineer to set up a CI/CD pipeline and Docker containers.",
+        "Reported all progress in Sprint Planning, Sprint Review and daily Standup meetings."
       ],
       subRoles: [
         {
           role: "Full Stack Engineer Intern",
           duration: "Jun 2019 – Sep 2019",
           bullets: [
-            "Developed Asset Management application and pre-Alpha release website.",
-            "Led UI development of the MVP which secured Series A funding."
+            "Worked collaboratively with the Backend Engineer and CTO to develop an Asset Management application.",
+            "Created the fully responsive company portfolio website in vanilla HTML/CSS, attracting numerous investors.",
+            "Developed the pre-Alpha release website using Contentful and NextJS attracting numerous clients.",
+            "Led UI development of the MVP using ReactJS/SCSS which was demoed to investors and led to securing Series A funding."
+          ]
+        }
+      ]
+    },
+    {
+      role: "Software Engineering Intern",
+      company: "Xesto",
+      location: "Toronto, ON",
+      duration: "Jan 2018 – Mar 2018",
+      bullets: [
+        "Collaborated with a team of 4 to help build a Gesture based API.",
+        "Built the frontend UI of the 'Enterprises' and 'Contact Us' page using HTML, SCSS and Webpack.",
+        "Designed the Email server with Express using Mailgun's API to send automated emails.",
+        "Integrated an interactive Wysiwyg editor using React communicating with the Express server, improving Xesto's overall client outreach."
+      ]
+    },
+    {
+      role: "Intern Developer",
+      company: "Rush Hour Media",
+      location: "Hong Kong",
+      duration: "Jun 2016 – Aug 2016",
+      bullets: [
+        "Developed a franchise page for Studio Fitness, Hong Kong using SCSS, WordPress CMS and JS.",
+        "Rebuilt the UI of an outdated library website for Alliance Française, Hong Kong (AFHK) named Médiathèque using CSS and JavaScript.",
+        "Integrated the Google Maps API and Slick.js plugin to create the 'Locations' and 'Testimonials' sections of the main AFHK website.",
+        "Performed routine QA checks on existent projects and reported any inconsistencies on JIRA and Trello.",
+        "Worked collaboratively in an Agile environment with a team of 4, improving project efficiency by 50%."
+      ]
+    },
+    {
+      role: "Full-Stack Developer Intern",
+      company: "RightBlue Labs",
+      location: "Toronto, ON",
+      duration: "Jun 2015 – Nov 2015",
+      description: "Designed an athlete monitoring system known as Logit, which now has over 300 users and 5 Canadian Olympic teams.",
+      bullets: [
+        "Designed in collaboration with a team of 4 an athlete monitoring system using JavaScript and Django, now serving 300+ users and 5 Canadian Olympic teams.",
+        "Enhanced front-end design of the calendar page where athletes and coaches book training sessions, improving user experience by 25% by reducing page redirects.",
+        "Improved user experience of the personal sessions page where athletes record their progress after training sessions through enhanced code efficiency and reduced runtime."
+      ]
+    },
+    {
+      role: "Research Engineer",
+      company: "MagicFlow",
+      location: "Toronto, ON",
+      duration: "May 2015 – Jun 2015",
+      bullets: [
+        "Implemented social media API features through MeanJS framework and Passport OAuth API, allowing users to sign in through their social media accounts.",
+        "Developed an opportunities section allowing users to search for jobs and events using leafletJS map API, jQuery and AngularJS, reducing lines of code by 50%.",
+        "Designed and Developed the LikeMagic organization's website, an organization affiliated with MagicFlow.",
+        "Designed and Developed MagicFlow's pre-release website through Bootstrap and jQuery animations."
+      ]
+    },
+    {
+      role: "Web Developer Intern",
+      company: "Digital Butter",
+      location: "Hong Kong",
+      duration: "Jul 2014 – Aug 2014",
+      bullets: [
+        "Enhanced the Digital Butter website's user interface through Bootstrap and jQuery library, reducing lines of code by 50%.",
+        "Adapted website on multiple platforms and browsers with Xcode iOS simulator for optimum compatibility.",
+        "Integrated a secret Konami code to unlock a flappy bird game through JavaScript and jQuery event handlers.",
+        "Acquired experience with Bootstrap and Craft CMS as an alternative to hard coding for better reliability and performance."
+      ],
+      subRoles: [
+        {
+          role: "Web Developer Intern",
+          duration: "Jul 2013 – Aug 2013",
+          bullets: [
+            "Created a survey web application for a Guinness & Co. event to collect feedback from attendees.",
+            "Enhanced the website's storage efficiency through the use of LocalStorage in HTML5, reducing data transmission to the server by 100%.",
+            "Built an effective page navigator so users would not require a page refresh to navigate through links."
           ]
         }
       ]
