@@ -1,95 +1,73 @@
-"use client";
+import type { Metadata } from "next";
+import ProjectsContent from "@/components/pages/ProjectsContent";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+export const metadata: Metadata = {
+  title: "Projects | AI Resume Builder & Open Source | Shrey Kumar",
+  description: "Personal projects by Shrey Kumar — including an AI Resume Builder built with Next.js and Anthropic Claude, and SleekCarousal, a React NPM package with 100+ weekly downloads.",
+  keywords: [
+    "Shrey Kumar projects", "AI resume builder Next.js", "React NPM package",
+    "open source software engineer", "Anthropic Claude project", "Vercel AI SDK project",
+    "software engineer portfolio projects"
+  ],
+  alternates: { canonical: "https://shreykumar.me/projects" },
+  openGraph: {
+    title: "Projects | Shrey Kumar",
+    description: "Personal and open-source projects including an AI Resume Builder and React NPM package.",
+    url: "https://shreykumar.me/projects",
+  },
+};
 
-export default function Projects() {
-  const projects = [
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shreykumar.me" },
+    { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://shreykumar.me/projects" }
+  ]
+};
+
+const projectListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Software Projects — Shrey Kumar",
+  "description": "Personal and open-source software projects built by Shrey Kumar.",
+  "itemListElement": [
     {
-      title: "AI Resume Builder",
-      description: "A multi-step, AI-driven Next.js web app enabling users to create resumes through an interview-style workflow.",
-      bullets: [
-        "Built with Next.js 16, React Server Components, and Vercel AI SDK.",
-        "Integrated AI-assisted UI generation via V0 to prototype user flows rapidly.",
-        "Designed a robust API route for handling prompts with Anthropic Claude."
-      ],
-      tags: ["Next.js", "AI", "Anthropic Claude", "Vercel"],
-      github: "https://github.com/ShreyKumar/ai-resume-builder",
-      demo: "https://v0-resume-generator-app-jade.vercel.app/"
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "SoftwareSourceCode",
+        "name": "AI Resume Builder",
+        "description": "A multi-step, AI-driven Next.js web app enabling users to create resumes through an interview-style workflow. Built with Next.js, React Server Components, Vercel AI SDK, and Anthropic Claude.",
+        "codeRepository": "https://github.com/ShreyKumar/ai-resume-builder",
+        "url": "https://v0-resume-generator-app-jade.vercel.app/",
+        "programmingLanguage": ["TypeScript", "JavaScript"],
+        "runtimePlatform": "Next.js",
+        "author": { "@id": "https://shreykumar.me/#person" }
+      }
     },
     {
-      title: "SleekCarousal",
-      description: "A highly customizable and animated React Carousel NPM package.",
-      bullets: [
-        "Implemented panning, scrolling, and relay animations using the Framer Motion API.",
-        "Created a clickable dot tracker to monitor active slides leveraging efficient React state management.",
-        "Secured 100+ weekly downloads since publication."
-      ],
-      tags: ["React", "NPM Package", "Framer Motion", "TypeScript"],
-      github: "#",
-      demo: "https://npmjs.com/package/sleek-react-carousel"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "SoftwareSourceCode",
+        "name": "SleekCarousal",
+        "description": "A highly customizable and animated React Carousel NPM package using Framer Motion. Secured 100+ weekly downloads since publication.",
+        "url": "https://npmjs.com/package/sleek-react-carousel",
+        "programmingLanguage": ["TypeScript", "JavaScript"],
+        "runtimePlatform": "React",
+        "author": { "@id": "https://shreykumar.me/#person" }
+      }
     }
-  ];
+  ]
+};
 
+export default function Projects() {
   return (
-    <div className="max-w-5xl mx-auto space-y-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Featured Projects</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          A selection of personal initiatives, open-source packages, and AI integrations I&apos;ve built.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-            className="glass rounded-2xl p-8 flex flex-col h-full hover:shadow-lg transition-all hover:-translate-y-1 border border-border"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <h2 className="text-2xl font-bold text-foreground">{project.title}</h2>
-              <div className="flex gap-3">
-                {project.github !== "#" && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110">
-                    <span className="sr-only">GitHub</span>
-                    <Github size={24} />
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110">
-                    <span className="sr-only">Live Demo</span>
-                    <ExternalLink size={24} />
-                  </a>
-                )}
-              </div>
-            </div>
-            
-            <p className="text-muted-foreground text-lg mb-6 flex-grow">{project.description}</p>
-            
-            <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-2 mb-8 marker:text-primary/50 text-sm">
-              {project.bullets.map((bullet, i) => (
-                <li key={i}>{bullet}</li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {project.tags.map(tag => (
-                <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-semibold">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectListSchema) }} />
+      <ProjectsContent />
+    </>
   );
 }

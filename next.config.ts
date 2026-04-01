@@ -17,6 +17,20 @@ const cspHeader = `
 const nextConfig: NextConfig = {
   async headers() {
     return [
+      // Immutable cache for hashed Next.js static assets
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Long-lived cache for public images/fonts
+      {
+        source: '/(.*)\\.(jpg|jpeg|png|webp|svg|ico|woff|woff2)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' },
+        ],
+      },
       {
         source: '/(.*)',
         headers: [

@@ -1,80 +1,64 @@
-"use client";
-
+import type { Metadata } from "next";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
-import { motion } from "framer-motion";
-import { Card, Badge, Heading } from "@/components/ui/Primitives";
-import ExperienceCard from "@/components/ExperienceCard";
+import AboutContent from "@/components/pages/AboutContent";
+
+export const metadata: Metadata = {
+  title: "About Shrey Kumar | 10+ Years Software Engineering Experience",
+  description: "Learn about Shrey Kumar — Senior Software Engineer & Technical Lead with 10+ years of experience in React, Next.js, TypeScript, Node.js, and composable commerce. Full work history from ecobee, Corra, Orium, and more.",
+  keywords: [
+    "Shrey Kumar about", "Shreyansh Kumar experience", "software engineer work history",
+    "senior frontend engineer", "technical lead experience", "React Next.js TypeScript developer",
+    "composable commerce engineer", "e-commerce technical lead", "software engineer Vancouver Canada"
+  ],
+  alternates: { canonical: "https://shreykumar.me/about" },
+  openGraph: {
+    title: "About Shrey Kumar | Senior Software Engineer",
+    description: "10+ years of experience building scalable web applications. Full work history, technical skills, and career achievements.",
+    url: "https://shreykumar.me/about",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shreykumar.me" },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": "https://shreykumar.me/about" }
+  ]
+};
+
+const workHistorySchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Work Experience — Shrey Kumar",
+  "description": "Complete professional work history of Shrey Kumar, Senior Software Engineer & Technical Lead",
+  "itemListElement": PORTFOLIO_DATA.experience.map((exp, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "EmployeeRole",
+      "roleName": exp.role,
+      "description": exp.description ?? exp.bullets[0],
+      "startDate": exp.duration.split("–")[0].trim(),
+      "endDate": exp.duration.includes("Present") ? undefined : exp.duration.split("–")[1]?.trim(),
+      "worksFor": {
+        "@type": "Organization",
+        "name": exp.company,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": exp.location
+        }
+      }
+    }
+  }))
+};
 
 export default function About() {
   return (
-    <main className="max-w-4xl mx-auto space-y-16 px-4">
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        aria-labelledby="about-title"
-      >
-        <Heading level={1} id="about-title">About Me</Heading>
-        <p className="text-xl text-muted-foreground leading-relaxed">
-          I am a {PORTFOLIO_DATA.title} with expertise in creating scalable web applications, 
-          driving architectural modernizations, and leading cross-functional teams. I specialize in the modern frontend ecosystem
-          and composable commerce, always striving for excellence in performance, code quality, and user experience.
-        </p>
-
-        <div className="mt-12">
-          <Heading level={2} className="border-b pb-2">Technical Skills</Heading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" role="list">
-            {PORTFOLIO_DATA.skills.map((skill, index) => (
-              <Card 
-                key={skill.category} 
-                delay={0.1 * index}
-                role="listitem"
-                aria-labelledby={`skill-${index}-title`}
-              >
-                <Heading level={3} id={`skill-${index}-title`} className="text-lg mb-2">
-                  {skill.category}
-                </Heading>
-                <p className="text-muted-foreground leading-relaxed">{skill.items}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        aria-labelledby="experience-title"
-      >
-        <Heading level={2} id="experience-title" className="border-b pb-4 mb-10">Professional Experience</Heading>
-        
-        <div className="space-y-4">
-          {PORTFOLIO_DATA.experience.map((exp, index) => (
-            <ExperienceCard
-              key={`${exp.company}-${exp.role}`}
-              role={exp.role}
-              company={exp.company}
-              location={exp.location}
-              duration={exp.duration}
-              description={exp.description}
-              bullets={exp.bullets}
-            >
-              {exp.subRoles?.map((sub) => (
-                <div key={sub.role} className="pl-0 md:pl-6 border-l-2 border-border mt-8 pt-6">
-                  <Heading level={4} className="text-xl mb-1">{sub.role}</Heading>
-                  <p className="text-muted-foreground mb-4 font-medium text-sm">{sub.duration}</p>
-                  <ul className="list-disc leading-relaxed text-muted-foreground pl-5 space-y-3 marker:text-primary/50">
-                    {sub.bullets.map((bullet, i) => (
-                      <li key={i}>{bullet}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </ExperienceCard>
-          ))}
-        </div>
-      </motion.section>
-    </main>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(workHistorySchema) }} />
+      <AboutContent />
+    </>
   );
 }
